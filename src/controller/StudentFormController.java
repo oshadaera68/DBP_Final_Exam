@@ -108,8 +108,12 @@ public class StudentFormController {
         stm.setString(6, s1.getNic());
         if (stm.executeUpdate() > 0) {
             new Alert(Alert.AlertType.CONFIRMATION, "Saved..!").show();
+            loadAllStudents();
+            clearTextField();
         } else {
             new Alert(Alert.AlertType.WARNING, "Try Again").show();
+            loadAllStudents();
+            clearTextField();
         }
     }
 
@@ -127,8 +131,12 @@ public class StudentFormController {
 
         if (stm.executeUpdate() > 0) {
             new Alert(Alert.AlertType.CONFIRMATION, "Updated Student.").show();
+            loadAllStudents();
+            clearTextField();
         } else {
             new Alert(Alert.AlertType.WARNING, "Try Again").show();
+            loadAllStudents();
+            clearTextField();
         }
     }
 
@@ -137,9 +145,21 @@ public class StudentFormController {
         stm.setString(1, txtId.getText());
         if (stm.executeUpdate() > 0) {
             new Alert(Alert.AlertType.CONFIRMATION, "Deleted Student.").show();
+            loadAllStudents();
+            clearTextField();
         } else {
             new Alert(Alert.AlertType.WARNING, "Try Again").show();
+            loadAllStudents();
+            clearTextField();
         }
+    }
 
+    private void clearTextField() {
+        txtId.clear();
+        txtName.clear();
+        txtEmail.clear();
+        txtContact.clear();
+        txtAddress.clear();
+        txtNic.clear();
     }
 }
