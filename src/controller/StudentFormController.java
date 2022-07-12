@@ -12,11 +12,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Student;
 import view.tm.StudentTm;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Observable;
 
 public class StudentFormController {
     public JFXTextField txtId;
@@ -57,22 +57,24 @@ public class StudentFormController {
         ArrayList<Student> students = new ArrayList<>();
         ObservableList<StudentTm> obList = FXCollections.observableArrayList();
         try {
-            ResultSet set = DbConnection.getInstance().getConnection().prepareStatement("SELECT * FROM Student").executeQuery();
-            while (set.next()) {
-                students.add(new Student(
-                        set.getString(1),
-                        set.getString(2),
-                        set.getString(3),
-                        set.getString(4),
-                        set.getString(5),
-                        set.getString(6)
-                ));
+            Connection connection = DbConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Student");
+            ResultSet rst = preparedStatement.executeQuery();
 
-                for (Student tm : students) {
-                    obList.add(new StudentTm(tm.getId(), tm.getName(), tm.getEmail(), tm.getContact(), tm.getAddress(), tm.getNic()));
-                }
-                tblStudent.setItems(obList);
+            while (rst.next()) {
+                students.add(new Student(
+                        rst.getString(1),
+                        rst.getString(2),
+                        rst.getString(3),
+                        rst.getString(4),
+                        rst.getString(5),
+                        rst.getString(6))
+                );
             }
+            for (Student stu : students) {
+                obList.add(new StudentTm(stu.getId(), stu.getName(), stu.getEmail(), stu.getContact(), stu.getAddress(), stu.getNic()));
+            }
+            tblStudent.setItems(obList);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
