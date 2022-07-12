@@ -94,4 +94,19 @@ CREATE TABLE IF NOT EXISTS Payment
     CONSTRAINT FOREIGN KEY (registration_id) REFERENCES Registration (registration_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 SHOW TABLES;
-DESC Payment
+DESC Payment;
+
+INSERT INTO Teacher (teacher_id, name, nic, contact, address)
+VALUES ('T001','Nipuna','343234367','0175454561','julgaha junction');
+
+INSERT INTO Teacher (teacher_id, name, nic, contact, address)
+VALUES ('T002','Kaveesha','254236726','46378262','AHANGAMA');
+
+INSERT INTO Teacher (teacher_id, name, nic, contact, address)
+VALUES ('T003','hansani','5326667223','3435625272','MATHARA');
+
+INSERT INTO Teacher (teacher_id, name, nic, contact, address)
+VALUES ('T004','nishan','4235167263','4312474632','GALLE');
+
+INSERT INTO Teacher (teacher_id, name, nic, contact, address)
+VALUES ('T005','kavindu','423572632','0348243874','wakwella');
